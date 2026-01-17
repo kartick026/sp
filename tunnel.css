@@ -19,11 +19,6 @@
             #7a1230 30%,
             #6b0f2a 60%,
             #5a0c22 100%);
-
-    /* Performance optimization */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    will-change: auto;
 }
 
 /* Golden center glow */
@@ -51,12 +46,6 @@
     background-position: center;
     will-change: transform;
     z-index: 2;
-
-    /* Hardware acceleration */
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 /* Ring 1 - Subtle with organic fade */
@@ -205,21 +194,5 @@
         margin-left: -350px;
         margin-top: -350px;
         opacity: 0.1;
-    }
-
-    /* Reduce animation complexity on very small screens */
-    .ring-3 {
-        display: none;
-        /* Hide third ring on small phones for better performance */
-    }
-
-    /* Slow down animations for better performance */
-    .ring-1 {
-        animation-duration: 80s;
-        /* Slower = less CPU */
-    }
-
-    .ring-2 {
-        animation-duration: 120s;
     }
 }
