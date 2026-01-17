@@ -1,6 +1,8 @@
 /* =====================================================
-   ROYAL CURTAIN PRELOADER
+   ELEGANT PRELOADER - VISIBLE MANDALA
+   Simple, beautiful, working design
    ===================================================== */
+
 .preloader {
     position: fixed;
     inset: 0;
@@ -8,110 +10,205 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none;
-    /* Let clicks pass through after animation */
+    pointer-events: auto;
+    cursor: pointer;
+    overflow: hidden;
+
+    /* Rich maroon background */
+    background: radial-gradient(circle at center,
+            #8B1538 0%,
+            #7a1230 30%,
+            #6b0f2a 60%,
+            #5a0c22 100%);
 }
 
-/* The Two Royal Curtains (Left and Right panels) */
-.preloader::before,
-.preloader::after {
+/* Warm golden glow at center */
+.preloader::before {
     content: '';
     position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center,
+            rgba(212, 175, 55, 0.1) 0%,
+            rgba(212, 175, 55, 0.03) 30%,
+            transparent 50%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.preloader.hidden {
+    pointer-events: none;
+}
+
+/* =====================================================
+   MANDALA RINGS - VISIBLE AND BEAUTIFUL
+   ===================================================== */
+.preloader-tunnel {
+    position: absolute;
     top: 0;
-    width: 51%;
-    /* Slight overlap to prevent gap lines */
-    height: 100%;
-    background: var(--maroon-dark);
-    /* Subtle decorative pattern opacity on the curtains */
-    background-image:
-        radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z' fill='%23D4AF37' fill-opacity='0.03'/%3E%3C/svg%3E");
-    z-index: -1;
-    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    /* Shadow depth */
-}
-
-.preloader::before {
     left: 0;
-    border-right: 1px solid rgba(212, 175, 55, 0.2);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
 }
 
-.preloader::after {
-    right: 0;
-    border-left: 1px solid rgba(212, 175, 55, 0.2);
-}
-
-/* Animation State: Hidden (Curtains Open) */
-.preloader.hidden::before {
-    transform: translateX(-100%);
-}
-
-.preloader.hidden::after {
-    transform: translateX(100%);
-}
-
-/* Center Content (Logo/Symobl) */
-.preloader-content {
-    text-align: center;
-    color: var(--gold);
-    z-index: 10;
-    transition: opacity 0.5s ease;
-    background: rgba(107, 15, 42, 0.9);
-    /* Slight backdrop for text readability */
-    padding: 40px;
+.preloader-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     border-radius: 50%;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
-
-    /* Decorative Ring around the content */
-    position: relative;
+    background-image: url('mandala_ring.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 2;
 }
 
-/* Spinning Golden Ring */
+/* Ring 1 - Inner, subtle with organic fade */
+.preloader-ring.ring-1 {
+    width: 800px;
+    height: 800px;
+    margin-left: -400px;
+    margin-top: -400px;
+    opacity: 0.3;
+    animation: spinMandala 50s linear infinite;
+
+    /* Elliptical radial mask for seamless edges */
+    -webkit-mask-image: radial-gradient(ellipse 55% 48% at 50% 50%,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 35%,
+            rgba(0, 0, 0, 0.9) 50%,
+            rgba(0, 0, 0, 0.7) 65%,
+            rgba(0, 0, 0, 0.4) 75%,
+            rgba(0, 0, 0, 0.15) 85%,
+            rgba(0, 0, 0, 0.05) 92%,
+            transparent 100%);
+    mask-image: radial-gradient(ellipse 55% 48% at 50% 50%,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 35%,
+            rgba(0, 0, 0, 0.9) 50%,
+            rgba(0, 0, 0, 0.7) 65%,
+            rgba(0, 0, 0, 0.4) 75%,
+            rgba(0, 0, 0, 0.15) 85%,
+            rgba(0, 0, 0, 0.05) 92%,
+            transparent 100%);
+}
+
+/* Ring 2 - Outer, very subtle with organic fade */
+.preloader-ring.ring-2 {
+    width: 1400px;
+    height: 1400px;
+    margin-left: -700px;
+    margin-top: -700px;
+    opacity: 0.15;
+    animation: spinMandala 80s linear infinite reverse;
+
+    /* Asymmetric elliptical mask for natural dissolve */
+    -webkit-mask-image: radial-gradient(ellipse 48% 52% at 50% 50%,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.7) 25%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.3) 55%,
+            rgba(0, 0, 0, 0.15) 68%,
+            rgba(0, 0, 0, 0.05) 80%,
+            rgba(0, 0, 0, 0.02) 90%,
+            transparent 100%);
+    mask-image: radial-gradient(ellipse 48% 52% at 50% 50%,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.7) 25%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.3) 55%,
+            rgba(0, 0, 0, 0.15) 68%,
+            rgba(0, 0, 0, 0.05) 80%,
+            rgba(0, 0, 0, 0.02) 90%,
+            transparent 100%);
+}
+
+/* Ring 3 - Outermost, extremely subtle atmospheric layer */
+.preloader-ring.ring-3 {
+    width: 2000px;
+    height: 2000px;
+    margin-left: -1000px;
+    margin-top: -1000px;
+    opacity: 0.08;
+    animation: spinMandala 110s linear infinite;
+
+    /* Very soft elliptical mask for atmospheric depth */
+    -webkit-mask-image: radial-gradient(ellipse 45% 50% at 50% 50%,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.4) 20%,
+            rgba(0, 0, 0, 0.25) 35%,
+            rgba(0, 0, 0, 0.12) 50%,
+            rgba(0, 0, 0, 0.05) 65%,
+            rgba(0, 0, 0, 0.02) 80%,
+            transparent 95%);
+    mask-image: radial-gradient(ellipse 45% 50% at 50% 50%,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.4) 20%,
+            rgba(0, 0, 0, 0.25) 35%,
+            rgba(0, 0, 0, 0.12) 50%,
+            rgba(0, 0, 0, 0.05) 65%,
+            rgba(0, 0, 0, 0.02) 80%,
+            transparent 95%);
+
+    filter: blur(1px);
+}
+
+@keyframes spinMandala {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =====================================================
+   CENTER CONTENT
+   ===================================================== */
+.preloader-content {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    padding: 50px;
+    border-radius: 50%;
+
+    background: radial-gradient(circle,
+            rgba(139, 21, 56, 0.92) 0%,
+            rgba(107, 15, 42, 0.88) 100%);
+
+    border: 2px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+        0 0 60px rgba(212, 175, 55, 0.12),
+        0 0 30px rgba(139, 21, 56, 0.4);
+    backdrop-filter: blur(8px);
+
+    animation: floatContent 5s ease-in-out infinite;
+}
+
 .preloader-content::before {
     content: '';
     position: absolute;
-    inset: -15px;
-    border: 2px dashed rgba(212, 175, 55, 0.4);
+    inset: -18px;
+    border: 1.5px dashed rgba(212, 175, 55, 0.25);
     border-radius: 50%;
-    animation: spinSlow 10s linear infinite;
+    animation: spinSlow 20s linear infinite;
 }
 
-.preloader.hidden .preloader-content {
-    opacity: 0;
-    transform: scale(0.8);
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
+@keyframes floatContent {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
-/* Symbols & Text */
-/* Symbols & Text */
-.preloader-symbol-img {
-    width: 140px;
-    /* Increased size */
-    height: 140px;
-    object-fit: contain;
-    margin-bottom: 25px;
-    filter: drop-shadow(0 0 15px rgba(255, 223, 0, 0.4)) brightness(1.2);
-    /* Enhanced glow & brightness */
-    animation: pulseGlow 3s ease-in-out infinite;
-    display: inline-block;
-}
-
-.preloader-text {
-    font-family: var(--font-script);
-    font-size: 2.2rem;
-    letter-spacing: 1px;
-    color: var(--cream);
-    /* Reveal animation for text */
-    animation: fadeInUp 1s ease forwards 0.3s;
-    opacity: 0;
-}
-
-/* Animations */
 @keyframes spinSlow {
     from {
         transform: rotate(0deg);
@@ -122,28 +219,155 @@
     }
 }
 
+/* =====================================================
+   GANESH SYMBOL
+   ===================================================== */
+.preloader-symbol-img {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    margin: 0 auto 15px;
+    display: block;
+    filter:
+        drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)) brightness(1.1);
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
 @keyframes pulseGlow {
 
     0%,
     100% {
         transform: scale(1);
-        text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
     }
 
     50% {
-        transform: scale(1.05);
-        text-shadow: 0 0 40px rgba(212, 175, 55, 0.8), 0 0 10px rgba(212, 175, 55, 0.8);
+        transform: scale(1.04);
     }
 }
 
-@keyframes fadeInUp {
-    from {
+/* =====================================================
+   TAP TO ENTER
+   ===================================================== */
+.preloader-text {
+    font-family: var(--font-script);
+    font-size: 2.2rem;
+    color: #f5d67b;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    animation: textReveal 1.5s ease forwards;
+    opacity: 0;
+    margin-top: 10px;
+}
+
+@keyframes textReveal {
+    0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(15px);
     }
 
-    to {
+    100% {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* =====================================================
+   EXIT ANIMATION
+   ===================================================== */
+.preloader.hidden .preloader-tunnel {
+    animation: tunnelFade 1s ease forwards;
+}
+
+@keyframes tunnelFade {
+    to {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.preloader.hidden .preloader-content {
+    animation: contentFade 0.7s ease forwards;
+}
+
+@keyframes contentFade {
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+.preloader.hidden {
+    animation: preloaderFade 1s ease 0.4s forwards;
+}
+
+@keyframes preloaderFade {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* =====================================================
+   MOBILE - VISIBLE MANDALA
+   ===================================================== */
+@media (max-width: 768px) {
+    .preloader-content {
+        padding: 40px;
+    }
+
+    .preloader-symbol-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .preloader-text {
+        font-size: 1.8rem;
+    }
+
+    /* Subtle mandala on mobile */
+    .preloader-ring.ring-1 {
+        width: 500px;
+        height: 500px;
+        margin-left: -250px;
+        margin-top: -250px;
+        opacity: 0.28;
+    }
+
+    .preloader-ring.ring-2 {
+        width: 900px;
+        height: 900px;
+        margin-left: -450px;
+        margin-top: -450px;
+        opacity: 0.12;
+    }
+}
+
+@media (max-width: 480px) {
+    .preloader-content {
+        padding: 32px;
+    }
+
+    .preloader-symbol-img {
+        width: 85px;
+        height: 85px;
+    }
+
+    .preloader-text {
+        font-size: 1.5rem;
+    }
+
+    .preloader-ring.ring-1 {
+        width: 400px;
+        height: 400px;
+        margin-left: -200px;
+        margin-top: -200px;
+        opacity: 0.25;
+    }
+
+    .preloader-ring.ring-2 {
+        width: 700px;
+        height: 700px;
+        margin-left: -350px;
+        margin-top: -350px;
+        opacity: 0.1;
     }
 }

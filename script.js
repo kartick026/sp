@@ -605,11 +605,38 @@ document.addEventListener('DOMContentLoaded', () => {
 // =====================================================
 // PRELOADER (OPTIONAL)
 // =====================================================
+// =====================================================
+// PRELOADER & MUSIC START (INTERACTION REQUIRED)
+// =====================================================
+// We use the preloader as the "Interaction Gate" to allow audio to play.
 window.addEventListener('load', () => {
     const preloader = document.querySelector('.preloader');
+    const music = document.getElementById('wedding-music');
+
     if (preloader) {
-        preloader.classList.add('hidden');
-        setTimeout(() => preloader.remove(), 500);
+        // Function to handle site entry
+        const enterSite = () => {
+            // 1. Play Music
+            if (music) {
+                music.volume = 1.0;
+                music.play().then(() => {
+                    console.log("Music started on entry");
+                }).catch(e => console.error("Music failed:", e));
+            }
+
+            // 2. Remove Preloader
+            preloader.classList.add('hidden');
+            setTimeout(() => preloader.remove(), 800);
+
+            // 3. Remove Listener
+            preloader.removeEventListener('click', enterSite);
+        };
+
+        // Wait for click anywhere on preloader
+        preloader.addEventListener('click', enterSite);
+
+        // Also allow scrolling to trigger it if user tries to scroll past
+        // (Though strictly scroll alone might not unlock audio in Chrome, clicking is safer)
     }
 });
 
@@ -649,63 +676,37 @@ function initMandalaTunnel() {
 // =====================================================
 // BACKGROUND MUSIC PLAYER (AUTOPLAY + TOGGLE)
 // =====================================================
+// =====================================================
+// BACKGROUND MUSIC PLAYER (AUTO-PLAY ON INTERACTION)
+// =====================================================
 document.addEventListener('DOMContentLoaded', () => {
-    const musicBtn = document.getElementById('music-btn');
     const music = document.getElementById('wedding-music');
     let isPlaying = false;
 
     if (music) {
-        // Toggle Function
-        const togglePlay = () => {
-            if (isPlaying) {
-                music.pause();
-                if (musicBtn) {
-                    musicBtn.textContent = '▶'; // Play symbol
-                    musicBtn.classList.remove('playing');
-                }
-            } else {
-                music.play().then(() => {
-                    if (musicBtn) {
-                        musicBtn.textContent = '⏸'; // Pause symbol
-                        musicBtn.classList.add('playing');
-                    }
-                }).catch(e => console.error(e));
-            }
-            isPlaying = !isPlaying;
+        music.volume = 1.0; // Set volume to 100%
+
+        const attemptPlay = () => {
+            if (isPlaying) return;
+
+            music.play().then(() => {
+                console.log("Audio started successfully");
+                isPlaying = true;
+                // Remove all listeners once playing starts
+                ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+                    document.removeEventListener(event, attemptPlay);
+                });
+            }).catch(error => {
+                console.log("Audio play failed (waiting for interaction):", error);
+            });
         };
 
-        if (musicBtn) {
-            musicBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                togglePlay();
-            });
-        }
+        // Try playing immediately
+        attemptPlay();
 
-        // Attempt Autoplay
-        music.play().then(() => {
-            console.log("Autoplay successful");
-            isPlaying = true;
-            if (musicBtn) {
-                musicBtn.textContent = '⏸';
-                musicBtn.classList.add('playing');
-            }
-        }).catch(error => {
-            console.log("Autoplay blocked");
-            const startInteraction = () => {
-                if (!isPlaying) {
-                    music.play().then(() => {
-                        isPlaying = true;
-                        if (musicBtn) {
-                            musicBtn.textContent = '⏸';
-                            musicBtn.classList.add('playing');
-                        }
-                    });
-                }
-                document.removeEventListener('click', startInteraction);
-                document.removeEventListener('touchstart', startInteraction);
-            };
-            document.addEventListener('click', startInteraction);
-            document.addEventListener('touchstart', startInteraction);
+        // Add listeners for any user interaction
+        ['click', 'scroll', 'touchstart', 'keydown'].forEach(event => {
+            document.addEventListener(event, attemptPlay, { passive: true });
         });
     }
 

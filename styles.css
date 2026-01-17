@@ -66,7 +66,8 @@ html {
 body {
     font-family: var(--font-body);
     color: var(--gray-800);
-    background: var(--cream);
+    background: #4d0a1d;
+    /* Warm maroon - Indian wedding tradition */
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -2428,6 +2429,42 @@ ul {
     font-size: 1.5rem;
 }
 
+/* Siblings styling */
+.family .siblings {
+    font-size: 0.9rem;
+    color: var(--gold-light);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Extended family section */
+.extended-family {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.guidance-text {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.family-members p {
+    font-size: 0.85rem;
+    color: var(--cream);
+    margin: 6px 0;
+    line-height: 1.5;
+}
+
+.family-members strong {
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-right: 5px;
+}
+
 .footer-blessing {
     font-family: var(--font-display);
     font-style: italic;
@@ -2525,6 +2562,26 @@ ul {
     font-size: 0.9rem;
     color: var(--cream);
     opacity: 0.7;
+}
+
+/* Dedication message styling */
+.dedication-msg {
+    font-family: var(--font-display);
+    font-size: 1rem !important;
+    color: var(--gold-light) !important;
+    opacity: 1 !important;
+    font-style: italic;
+    margin-top: 15px !important;
+    line-height: 1.6;
+}
+
+.signature {
+    font-family: var(--font-script);
+    font-size: 1.1rem !important;
+    color: var(--gold) !important;
+    opacity: 1 !important;
+    margin-top: 8px !important;
+    font-weight: 500;
 }
 
 /* =====================================================

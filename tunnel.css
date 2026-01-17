@@ -1,68 +1,198 @@
 /* =====================================================
-   3D MANDALA TUNNEL
+   MANDALA TUNNEL BACKGROUND - VISIBLE
+   Simple, beautiful, working design
    ===================================================== */
+
 .mandala-tunnel {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    /* Behind everything */
     pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1000px;
     overflow: hidden;
+
+    /* Rich maroon background */
+    background: radial-gradient(circle at center,
+            #8B1538 0%,
+            #7a1230 30%,
+            #6b0f2a 60%,
+            #5a0c22 100%);
 }
 
+/* Golden center glow */
+.mandala-tunnel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center,
+            rgba(212, 175, 55, 0.08) 0%,
+            rgba(212, 175, 55, 0.02) 30%,
+            transparent 50%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Base ring styling */
 .tunnel-ring {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     border-radius: 50%;
     background-image: url('mandala_ring.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0;
-    will-change: transform, opacity;
+    will-change: transform;
+    z-index: 2;
 }
 
+/* Ring 1 - Subtle with organic fade */
 .ring-1 {
-    width: 400px;
-    height: 400px;
-    z-index: 1;
-    opacity: 0.6;
-}
-
-.ring-2 {
     width: 800px;
     height: 800px;
-    z-index: 2;
-    opacity: 0.5;
-}
-
-.ring-3 {
-    width: 1200px;
-    height: 1200px;
-    z-index: 3;
-    opacity: 0.4;
-}
-
-.ring-4 {
-    width: 1800px;
-    height: 1800px;
-    z-index: 4;
+    margin-left: -400px;
+    margin-top: -400px;
     opacity: 0.3;
+    animation: spinClockwise 50s linear infinite;
+
+    /* Elliptical radial mask for organic fade */
+    -webkit-mask-image: radial-gradient(ellipse 55% 48% at 50% 50%,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 35%,
+            rgba(0, 0, 0, 0.9) 50%,
+            rgba(0, 0, 0, 0.7) 65%,
+            rgba(0, 0, 0, 0.4) 75%,
+            rgba(0, 0, 0, 0.15) 85%,
+            rgba(0, 0, 0, 0.05) 92%,
+            transparent 100%);
+    mask-image: radial-gradient(ellipse 55% 48% at 50% 50%,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 1) 35%,
+            rgba(0, 0, 0, 0.9) 50%,
+            rgba(0, 0, 0, 0.7) 65%,
+            rgba(0, 0, 0, 0.4) 75%,
+            rgba(0, 0, 0, 0.15) 85%,
+            rgba(0, 0, 0, 0.05) 92%,
+            transparent 100%);
 }
 
-.ring-5 {
-    width: 2500px;
-    height: 2500px;
-    z-index: 5;
-    opacity: 0.2;
+/* Ring 2 - Very subtle with organic fade */
+.ring-2 {
+    width: 1400px;
+    height: 1400px;
+    margin-left: -700px;
+    margin-top: -700px;
+    opacity: 0.15;
+    animation: spinCounterClockwise 80s linear infinite;
+
+    /* Asymmetric elliptical mask for natural dissolve */
+    -webkit-mask-image: radial-gradient(ellipse 48% 52% at 50% 50%,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.7) 25%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.3) 55%,
+            rgba(0, 0, 0, 0.15) 68%,
+            rgba(0, 0, 0, 0.05) 80%,
+            rgba(0, 0, 0, 0.02) 90%,
+            transparent 100%);
+    mask-image: radial-gradient(ellipse 48% 52% at 50% 50%,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.7) 25%,
+            rgba(0, 0, 0, 0.5) 40%,
+            rgba(0, 0, 0, 0.3) 55%,
+            rgba(0, 0, 0, 0.15) 68%,
+            rgba(0, 0, 0, 0.05) 80%,
+            rgba(0, 0, 0, 0.02) 90%,
+            transparent 100%);
+}
+
+/* Ring 3 - Outermost, extremely subtle atmospheric layer */
+.ring-3 {
+    width: 2000px;
+    height: 2000px;
+    margin-left: -1000px;
+    margin-top: -1000px;
+    opacity: 0.08;
+    animation: spinClockwise 110s linear infinite;
+
+    /* Very soft elliptical mask for atmospheric depth */
+    -webkit-mask-image: radial-gradient(ellipse 45% 50% at 50% 50%,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.4) 20%,
+            rgba(0, 0, 0, 0.25) 35%,
+            rgba(0, 0, 0, 0.12) 50%,
+            rgba(0, 0, 0, 0.05) 65%,
+            rgba(0, 0, 0, 0.02) 80%,
+            transparent 95%);
+    mask-image: radial-gradient(ellipse 45% 50% at 50% 50%,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.4) 20%,
+            rgba(0, 0, 0, 0.25) 35%,
+            rgba(0, 0, 0, 0.12) 50%,
+            rgba(0, 0, 0, 0.05) 65%,
+            rgba(0, 0, 0, 0.02) 80%,
+            transparent 95%);
+
+    filter: blur(1px);
+}
+
+@keyframes spinClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinCounterClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+/* =====================================================
+   MOBILE - VISIBLE MANDALA
+   ===================================================== */
+@media (max-width: 768px) {
+    .ring-1 {
+        width: 500px;
+        height: 500px;
+        margin-left: -250px;
+        margin-top: -250px;
+        opacity: 0.28;
+    }
+
+    .ring-2 {
+        width: 900px;
+        height: 900px;
+        margin-left: -450px;
+        margin-top: -450px;
+        opacity: 0.12;
+    }
+}
+
+@media (max-width: 480px) {
+    .ring-1 {
+        width: 400px;
+        height: 400px;
+        margin-left: -200px;
+        margin-top: -200px;
+        opacity: 0.25;
+    }
+
+    .ring-2 {
+        width: 700px;
+        height: 700px;
+        margin-left: -350px;
+        margin-top: -350px;
+        opacity: 0.1;
+    }
 }
