@@ -2417,11 +2417,32 @@ ul {
     color: var(--cream);
 }
 
+/* Grandparents section */
+.grandparents-section {
+    margin: 20px 0;
+    padding: 15px 0;
+}
+
+.grandparents-heading {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Grandparents styling - Enhanced */
 .family .grandparents {
-    font-size: 0.85rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
     font-style: italic;
-    color: var(--gold-light);
-    margin-top: 8px;
+    color: var(--gold);
+    margin-top: 0;
+    margin-bottom: 15px;
+    opacity: 1;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .family-divider {
