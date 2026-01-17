@@ -63,6 +63,8 @@ html {
     font-size: 16px;
     scroll-padding-top: 80px;
     /* Account for fixed navbar */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
 }
 
 body {
@@ -73,6 +75,27 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile Performance Optimization */
+@media (max-width: 768px) {
+    * {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    html {
+        scroll-behavior: auto;
+        /* Disable smooth scroll on mobile for better performance */
+    }
+
+    body {
+        scroll-behavior: auto;
+    }
 }
 
 img {
