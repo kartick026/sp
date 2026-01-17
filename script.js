@@ -331,15 +331,27 @@ function showNotification(message, type = 'success') {
 // =====================================================
 function initParallaxEffects() {
     const hero = document.querySelector('.hero');
+    const countdown = document.getElementById('countdown');
 
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
 
         if (hero) {
             const heroContent = hero.querySelector('.hero-content');
+            // Standard hero parallax
             if (heroContent && scrolled < window.innerHeight) {
                 heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-                heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+                heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.8;
+            }
+
+            // Dramatic countdown drop
+            if (countdown && scrolled < window.innerHeight) {
+                // Moves down faster (1.2x scroll speed) and fades out quickly
+                countdown.style.transform = `translateY(${scrolled * 1.5}px)`;
+                // opacity fades fully by 300px scroll
+                let opacity = 1 - (scrolled / 300);
+                opacity = Math.max(0, opacity);
+                countdown.style.opacity = opacity;
             }
         }
     });
