@@ -1,0 +1,68 @@
+/* =====================================================
+   3D MANDALA TUNNEL
+   ===================================================== */
+.mandala-tunnel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    /* Behind everything */
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.tunnel-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-image: url('mandala_ring.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.ring-1 {
+    width: 400px;
+    height: 400px;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+.ring-2 {
+    width: 800px;
+    height: 800px;
+    z-index: 2;
+    opacity: 0.5;
+}
+
+.ring-3 {
+    width: 1200px;
+    height: 1200px;
+    z-index: 3;
+    opacity: 0.4;
+}
+
+.ring-4 {
+    width: 1800px;
+    height: 1800px;
+    z-index: 4;
+    opacity: 0.3;
+}
+
+.ring-5 {
+    width: 2500px;
+    height: 2500px;
+    z-index: 5;
+    opacity: 0.2;
+}
